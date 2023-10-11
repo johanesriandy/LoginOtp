@@ -1,19 +1,21 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import Register from './Register/Register.screen';
-import OtpInput from './OtpInput/OtpInput.screen';
 import Login from './Login/Login.screen';
 import Welcome from './Welcome/Welcome.screen';
+import Otp from './Otp/Otp.screen';
+import { Dashboard } from './Dashboard/Dashboard.screen';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
+
+export type StackParamList = {
+  Login: undefined,
+  Register: undefined,
+  Welcome: undefined,
+  Otp: { email: string, password: string };
+  Dashboard: undefined,
+};
 
 function App(): React.JSX.Element {
   return (
@@ -30,7 +32,11 @@ function App(): React.JSX.Element {
         />
         <Stack.Screen
           name="Otp"
-          component={OtpInput}
+          component={Otp}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
         />
         <Stack.Screen
           name="Login"

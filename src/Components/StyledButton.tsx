@@ -4,13 +4,19 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 export interface StyledButtonProps {
     useSecondary?: boolean;
     title: string;
+    disabled?: boolean | undefined;
     onPress?: (() => void) | undefined;
 }
 
-function StyledButton({ useSecondary = false, title, onPress }: StyledButtonProps): JSX.Element {
+function StyledButton({ useSecondary = false, title, disabled, onPress }: StyledButtonProps): JSX.Element {
     return (
         <Pressable
-            style={[styles.button, useSecondary ? secondaryStyles.button : null]}
+            style={[
+                styles.button, 
+                disabled ? styles.disable : null,
+                useSecondary ? secondaryStyles.button : null
+            ]}
+            disabled={disabled}
             onPress={onPress}>
             <Text style={[styles.text, useSecondary ? secondaryStyles.text : null]}>{title}</Text>
         </Pressable>
@@ -28,6 +34,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#747474',
         backgroundColor: 'black',
+    },
+    disable: {
+        backgroundColor: 'grey',
     },
     text: {
         fontSize: 16,
